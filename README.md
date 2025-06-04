@@ -1,6 +1,5 @@
 # DomusIoT
 Description: Plataforma de controle remoto e agendamento de dispositivos IoT via MQTT.
-from pathlib import Path
 
 DomusIoT é uma plataforma open source para controle remoto e agendamento de dispositivos IoT, com interface web amigável, comunicação via MQTT e arquitetura escalável.
 
