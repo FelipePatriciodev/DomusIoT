@@ -7,7 +7,7 @@ DomusIoT é uma plataforma open source para controle remoto e agendamento de dis
 
 - Cadastro, edição e remoção de dispositivos
 - Ligar e desligar dispositivos remotamente
-- Agendamento de horários de funcionamento
+- Acionamento de cargas remotamente 110V/220V (Exemplo: Lâmpada).
 - Monitoramento em tempo real via MQTT
 - Autenticação segura com JWT
 - Interface web com Java + Vaadin
@@ -16,7 +16,7 @@ DomusIoT é uma plataforma open source para controle remoto e agendamento de dis
 ## 🧱 Tecnologias Utilizadas
 
 - **Backend:** Java, Spring Boot, Vaadin
-- **Firmware IoT:** C/C++, ESP32, PlatformIO
+- **Firmware IoT:** C/C++, ESP32, ESP-IDF
 - **Broker MQTT:** Mosquitto
 - **Testes Automatizados:** Python (Pytest, MQTT)
 - **Infraestrutura:** Docker, AWS (EC2, RDS, S3), GitHub Actions
