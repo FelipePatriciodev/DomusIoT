@@ -24,15 +24,7 @@ DomusIoT é uma plataforma open source para controle remoto e agendamento de dis
 - **Banco de Dados:** MySQL
 
 ## 🗂️ Estrutura do Projeto
-iot-device-manager/
-├── backend/ # Backend Java + Spring Boot + Vaadin
-├── firmware/ # Código do dispositivo ESP32 (C/C++)
-├── tests/ # Testes automatizados (API, MQTT, integração)
-├── infrastructure/ # Docker, Mosquitto, Terraform (AWS)
-├── docs/ # Documentação técnica
-├── .github/ # CI/CD com GitHub Actions
-├── README.md
-└── LICENSE
+<pre> ```text iot-device-manager/ ├── backend/ # Backend Java + Spring Boot + Vaadin ├── firmware/ # Código do dispositivo ESP32 (C/C++) ├── tests/ # Testes automatizados (API, MQTT, integração) ├── infrastructure/ # Docker, Mosquitto, Terraform (AWS) ├── docs/ # Documentação técnica ├── .github/ # CI/CD com GitHub Actions ├── README.md └── LICENSE ``` </pre>
 
 ## 🚀 Objetivo
 
