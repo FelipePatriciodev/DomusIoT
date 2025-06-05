@@ -1,0 +1,47 @@
+services:
+  mysql:
+    image: mysql:8
+    container_name: domusiot-mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: domusiot
+      MYSQL_ROOT_PASSWORD: admin
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - domus_net 
+
+
+#  mosquitto:
+#    image: eclipse-mosquitto
+#    container_name: domusiot-mosquitto
+#    ports:
+#      - "1883:1883"
+#      - "9001:9001"
+#    volumes:
+#      - ./mosquitto:/mosquitto
+
+  backend:
+    build:
+      context: ../backend
+    container_name: domusiot-backend
+    
+    depends_on:
+      - mysql
+#      - mosquitto
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/domusiot
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: admin
+    networks:
+      - domus_net
+
+volumes:
+  mysql_data:
+
+networks:
+  domus_net:
