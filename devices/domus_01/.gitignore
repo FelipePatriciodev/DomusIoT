@@ -1,0 +1,2 @@
+# Ignorar o arquivo de credenciais (em qualquer lugar do projeto)
+**/credentials.h
