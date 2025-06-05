@@ -1,2 +1,48 @@
 # Ignorar o arquivo de credenciais (em qualquer lugar do projeto)
 **/credentials.h
+
+# Diretórios de build
+/build/
+/dist/
+/*.bin
+/*.elf
+/*.map
+
+# Arquivos de flash e boot gerados
+*.bin
+*.elf
+*.map
+*.hex
+
+# Arquivos de partição e bootloader gerados
+partition_table.csv
+bootloader/
+
+# Logs
+*.log
+
+# Backup e temporários
+*~
+*.swp
+*.swo
+*.bak
+*.tmp
+*.orig
+
+# Python (se usar idf.py com venv)
+__pycache__/
+*.pyc
+.env/
+venv/
+.venv/
+
+# VSCode
+.vscode/
+
+# Arquivos de configuração do IDF
+sdkconfig
+sdkconfig.old
+
+# Outros
+.DS_Store
+.idea/
