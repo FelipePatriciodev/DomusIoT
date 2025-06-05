@@ -1,53 +1,63 @@
 # DomusIoT
-Description: Plataforma de controle remoto e agendamento de dispositivos IoT via MQTT.
 
-DomusIoT é uma plataforma open source para controle remoto e agendamento de dispositivos IoT, com interface web amigável, comunicação via MQTT e arquitetura escalável.
+**Description:** Remote control and scheduling platform for IoT devices using MQTT.
 
-## ✨ Funcionalidades
+DomusIoT is an open source platform for remote control and scheduling of IoT devices. It offers a user-friendly web interface, real-time MQTT communication, and a scalable architecture.
 
-- Cadastro, edição e remoção de dispositivos
-- Ligar e desligar dispositivos remotamente
-- Acionamento de cargas remotamente 110V/220V (Exemplo: Lâmpada).
-- Monitoramento em tempo real via MQTT
-- Autenticação segura com JWT
-- Interface web com Java + Vaadin
-- Firmware para ESP32 com PlatformIO
+---
 
-## 🧱 Tecnologias Utilizadas
+## ✨ Features
+- Register, edit, and remove devices  
+- Turn devices on and off remotely  
+- Control 110V/220V loads (e.g., lights, relays)  
+- Real-time monitoring via MQTT  
+- Secure authentication using JWT  
+- Web interface built with Java + Vaadin  
+- Firmware for ESP32 using PlatformIO  
 
-- **Backend:** Java, Spring Boot, Vaadin
-- **Firmware IoT:** C/C++, ESP32, ESP-IDF
-- **Broker MQTT:** Mosquitto
-- **Testes Automatizados:** Python (Pytest, MQTT)
-- **Infraestrutura:** Docker, AWS (EC2, RDS, S3), GitHub Actions
-- **Banco de Dados:** MySQL
+---
 
-## 🗂️ Estrutura do Projeto
+## 🧱 Tech Stack
+- **Backend:** Java, Spring Boot, Vaadin  
+- **Firmware:** C/C++, ESP32, ESP-IDF  
+- **MQTT Broker:** Mosquitto  
+- **Testing:** Python (Pytest, MQTT testing)  
+- **Infrastructure:** Docker, AWS (EC2, RDS, S3), GitHub Actions  
+- **Database:** MySQL  
+
+---
+
+## 🗂️ Project Structure
 ```text
 iot-device-manager/
-├── backend/          # Backend Java + Spring Boot + Vaadin
-├── firmware/         # Código do dispositivo ESP32 (C/C++)
-├── tests/            # Testes automatizados (API, MQTT, integração)
-├── infrastructure/   # Docker, Mosquitto, Terraform (AWS)
-├── docs/             # Documentação técnica
-├── .github/          # CI/CD com GitHub Actions
+├── backend/ # Java backend (Spring Boot + Vaadin)
+├── devices/ # ESP32 firmware code (C/C++)
+├── tests/ # Automated tests (API, MQTT, integration)
+├── infrastructure/ # Docker, Mosquitto config, AWS Terraform
+├── docs/ # Technical documentation
+├── .github/ # CI/CD with GitHub Actions
 ├── README.md
 └── LICENSE
 ```
 
+---
 
-## 🚀 Objetivo
+## 🚀 Purpose
 
-Fornecer uma plataforma genérica, extensível e amigável para controle de dispositivos IoT — reduzindo a dependência de apps proprietários e tornando o ecossistema mais aberto e interoperável.
+Provide a general-purpose, extensible, and user-friendly platform for managing IoT devices — reducing dependency on proprietary systems and promoting an open, interoperable ecosystem.
 
-## 🛠️ Como Contribuir
+---
 
-1. Fork o repositório
-2. Crie sua branch: `git checkout -b minha-feature`
-3. Faça commit das suas alterações: `git commit -m 'feat: minha nova feature'`
-4. Envie para o repositório remoto: `git push origin minha-feature`
-5. Abra um Pull Request
+## 🛠️ How to Contribute
 
-## 📜 Licença
+1. Fork this repository  
+2. Create a new branch: `git checkout -b my-feature`  
+3. Commit your changes: `git commit -m 'feat: my new feature'`  
+4. Push to your fork: `git push origin my-feature`  
+5. Open a Pull Request  
+
+---
+
+## 📜 License
 
 [MIT License](LICENSE)
