@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+/home/edsroch4/dev/DomusIoT/devices/domus_01/build/CMakeFiles/bootloader
+/home/edsroch4/dev/DomusIoT/devices/domus_01/build/CMakeFiles/bootloader.rule
+/home/edsroch4/dev/DomusIoT/devices/domus_01/build/CMakeFiles/bootloader-complete.rule
+/home/edsroch4/dev/DomusIoT/devices/domus_01/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/home/edsroch4/dev/DomusIoT/devices/domus_01/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/home/edsroch4/dev/DomusIoT/devices/domus_01/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/home/edsroch4/dev/DomusIoT/devices/domus_01/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/home/edsroch4/dev/DomusIoT/devices/domus_01/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/home/edsroch4/dev/DomusIoT/devices/domus_01/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/home/edsroch4/dev/DomusIoT/devices/domus_01/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
