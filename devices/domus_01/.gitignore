@@ -3,6 +3,7 @@
 
 # Build and output directories
 /build/
+/main/build/
 /.cache/
 /dist/
 cmake-build-*
