@@ -1,27 +1,30 @@
-# Ignorar o arquivo de credenciais (em qualquer lugar do projeto)
+# Ignore credentials file (anywhere in the project)
 **/credentials.h
 
-# Diretórios de build
+# Build and output directories
 /build/
+/.cache/
 /dist/
-/*.bin
-/*.elf
-/*.map
+cmake-build-*
 
-# Arquivos de flash e boot gerados
+# Compiled binary files
 *.bin
 *.elf
 *.map
 *.hex
 
-# Arquivos de partição e bootloader gerados
+# CMake cache and files
+CMakeCache.txt
+CMakeFiles/
+
+# Partition table and bootloader files
 partition_table.csv
 bootloader/
 
-# Logs
+# Log files
 *.log
 
-# Backup e temporários
+# Backup and temporary files
 *~
 *.swp
 *.swo
@@ -29,20 +32,13 @@ bootloader/
 *.tmp
 *.orig
 
-# Python (se usar idf.py com venv)
+# Python (if using idf.py with venv)
 __pycache__/
 *.pyc
 .env/
 venv/
 .venv/
 
-# VSCode
-.vscode/
-
-# Arquivos de configuração do IDF
+# IDF configuration files
 sdkconfig
 sdkconfig.old
-
-# Outros
-.DS_Store
-.idea/
