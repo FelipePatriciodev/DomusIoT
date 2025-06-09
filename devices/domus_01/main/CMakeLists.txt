@@ -3,6 +3,7 @@ set(SOURCES
 	wifi_manager.c
   mqtt_manager.c
   command_processor.c
+  ntp_manager.c
 )
 
 idf_component_register(SRCS ${SOURCES}
