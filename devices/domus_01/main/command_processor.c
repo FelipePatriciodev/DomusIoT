@@ -1,5 +1,7 @@
 #include "command_processor.h"
+#include "json_parser.h"
 #include <stdio.h>
+#include <string.h>
 
 #define LED_GPIO GPIO_NUM_2
 
@@ -35,17 +37,25 @@ static void command_processor_task(void *arg) {
   char *cptr = NULL;
   int value = 0;
 
+  device_state_t device = {.device_id = "esp32-001",
+                           .interval_min = 10,
+                           .output_status = 1,
+                           .schedule_count = 2,
+                           .schedules = {{6, 30, 1}, {22, 0, 0}}};
+
   while (1) {
     if (xQueueReceive(command_queue, &cmd, portMAX_DELAY)) {
-      char response[128];
-      if ((cptr = strstr(cmd.command, LED_CMD)) != NULL) {
-        cptr += strlen(LED_CMD);
-        sscanf(cptr, "%d", &value);
-        gpio_set_level(LED_GPIO, value);
-        strcpy(response, "\"result\":true");
-      } else {
-        strcpy(response, "\"result\":false");
-      }
+      char response[512];
+      // if ((cptr = strstr(cmd.command, LED_CMD)) != NULL) {
+      //   cptr += strlen(LED_CMD);
+      //   sscanf(cptr, "%d", &value);
+      //   gpio_set_level(LED_GPIO, value);
+      //   strcpy(response, "\"result\":true");
+      // } else {
+      //   strcpy(response, "\"result\":false");
+      // }
+      parse_downlink(cmd.command, &device);
+      format_uplink(response, sizeof(response), &device);
       mqtt_publish(cmd.response_topic, response);
     }
   }
