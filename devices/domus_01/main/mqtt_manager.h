@@ -11,12 +11,12 @@
 #include "string.h"
 
 typedef struct {
-  char command[128];
+  char command[512];
   char response_topic[64];
 } mqtt_command_t;
 
 typedef struct {
-  char payload[128];
+  char payload[512];
   char topic[64];
 } mqtt_publish_t;
 

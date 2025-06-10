@@ -4,6 +4,7 @@ set(SOURCES
   mqtt_manager.c
   command_processor.c
   ntp_manager.c
+  json_parser.c
 )
 
 idf_component_register(SRCS ${SOURCES}

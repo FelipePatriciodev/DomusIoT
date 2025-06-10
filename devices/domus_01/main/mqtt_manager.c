@@ -37,8 +37,8 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base,
     snprintf(cmd.command, sizeof(cmd.command), "%.*s", event->data_len,
              event->data);
     strcpy(cmd.response_topic, "/domus01/uplink/01");
-    printf("TOPIC=%.*s\r\n", event->topic_len, event->topic);
-    printf("DATA=%s\r\n", cmd.command);
+    // printf("TOPIC=%.*s\r\n", event->topic_len, event->topic);
+    // printf("DATA=%s\r\n", cmd.command);
     command_processor_enqueue(cmd); // envia para a fila de comandos
     break;
   default:
