@@ -21,6 +21,8 @@ services:
       - "9001:9001"
     volumes:
       - ./mosquitto:/mosquitto
+    networks:
+      - domus_net
 
   backend:
     build:
@@ -35,6 +37,9 @@ services:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+    env_file:
+      - .env
     networks:
       - domus_net
 

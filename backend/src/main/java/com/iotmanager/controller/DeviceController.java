@@ -25,9 +25,6 @@ public class DeviceController {
     @Autowired
     private DeviceService deviceService;
     
-    @Autowired
-    private MqttService mqttService;
-    
     @GetMapping
     public List<Device> list() {
         return deviceService.getAllDevices();
@@ -57,15 +54,10 @@ public class DeviceController {
         if (deviceOpt.isEmpty()) return ResponseEntity.notFound().build();
 
         Device device = deviceOpt.get();
-        device.setStatus(!device.isStatus()); // inverte
+        device.setStatus(!device.isStatus());
         deviceService.saveDevice(device);
 
-        try {
-            mqttService.publishCommand(device.getSerial(), device.isStatus() ? "ON" : "OFF");
-        } catch (MqttException e) {
-            return ResponseEntity.status(500).body("Error send to MQTT");
-        }
-
+     
         return ResponseEntity.ok(device);
     }
 

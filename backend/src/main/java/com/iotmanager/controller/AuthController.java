@@ -29,7 +29,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
         if (userService.findByUsername(user.getUsername()).isPresent()) {
-            return ResponseEntity.badRequest().body("Usuário já existe");
+            return ResponseEntity.badRequest().body("Other User");
         }
         User savedUser = userService.register(user);
         return ResponseEntity.ok(savedUser);
@@ -39,7 +39,7 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody User user) {
         UserDetails userDetails = userService.loadUserByUsername(user.getUsername());
         if (!new BCryptPasswordEncoder().matches(user.getPassword(), userDetails.getPassword())) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid");
         }
 
         String token = jwtUtil.generateToken(user.getUsername());
