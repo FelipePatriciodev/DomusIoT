@@ -30,4 +30,9 @@ public class DeviceService {
     public void deleteDevice(Long id) {
         deviceRepository.deleteById(id);
     }
+    
+    public boolean serialExists(String serial) {
+        return deviceRepository.findBySerial(serial).isPresent();
+    }
+
 }

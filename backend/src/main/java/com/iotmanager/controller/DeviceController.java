@@ -3,7 +3,6 @@ package com.iotmanager.controller;
 import java.util.List;
 import java.util.Optional;
 
-import org.eclipse.paho.client.mqttv3.MqttException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.iotmanager.dto.DeviceCommandDTO;
 import com.iotmanager.model.Device;
 import com.iotmanager.service.DeviceService;
 import com.iotmanager.service.MqttService;
@@ -24,6 +24,8 @@ public class DeviceController {
 
     @Autowired
     private DeviceService deviceService;
+    @Autowired
+    private MqttService mqttService;
     
     @GetMapping
     public List<Device> list() {
@@ -38,9 +40,20 @@ public class DeviceController {
     }
 
     @PostMapping
-    public Device create(@RequestBody Device device) {
-        return deviceService.saveDevice(device);
+    public ResponseEntity<?> create(@RequestBody Device device) {
+        if (device.getSerial() == null || device.getSerial().isBlank()) {
+            return ResponseEntity.badRequest().body("Serial is required.");
+        }
+
+        if (deviceService.serialExists(device.getSerial())) {
+            return ResponseEntity.status(409).body("A device with this serial already exists.");
+        }
+
+        Device saved = deviceService.saveDevice(device);
+        mqttService.subscribeToDevice(saved.getSerial());
+        return ResponseEntity.ok(saved);
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
@@ -48,17 +61,15 @@ public class DeviceController {
         return ResponseEntity.noContent().build();
     }
     
-    @PostMapping("/{id}/toggle")
-    public ResponseEntity<?> toggle(@PathVariable Long id) {
+    @PostMapping("/{id}/command")
+    public ResponseEntity<?> sendCommand(@PathVariable Long id, @RequestBody DeviceCommandDTO command) {
         Optional<Device> deviceOpt = deviceService.getDeviceById(id);
         if (deviceOpt.isEmpty()) return ResponseEntity.notFound().build();
 
-        Device device = deviceOpt.get();
-        device.setStatus(!device.isStatus());
-        deviceService.saveDevice(device);
-
-     
-        return ResponseEntity.ok(device);
+        String deviceSerial = deviceOpt.get().getSerial(); // assumindo que existe um campo "serial"
+        mqttService.publishCommand(deviceSerial, command);
+        
+        return ResponseEntity.ok("Comando enviado com sucesso.");
     }
 
 }
