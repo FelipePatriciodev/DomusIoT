@@ -12,17 +12,25 @@ public class User {
     private String username;
     private String password;
     private String role = "USER";
+    private String email;
     
     public User() {}
     
-	public User(Long id, String username, String password, String role) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.role = role;
+    public User(Long id, String username, String password, String role, String email) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.email = email;
+    }
+
+	public String getEmail() {
+		return email;
 	}
-	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public Long getId() {
 		return id;
 	}
