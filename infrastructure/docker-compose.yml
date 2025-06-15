@@ -42,6 +42,18 @@ services:
       - .env
     networks:
       - domus_net
+  frontend:
+    build:
+      context: ../frontend/domus_dash
+    container_name: domusiot-frontend
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+    environment:
+    - NEXT_PUBLIC_API_URL=http://localhost:8080
+    networks:
+      - domus_net
 
 volumes:
  mysql_data:
