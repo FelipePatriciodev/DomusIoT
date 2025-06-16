@@ -13,11 +13,14 @@ import com.iotmanager.repository.ProgrammingRepository;
 @Service
 public class ProgrammingService {
 
-    @Autowired
-    private ProgrammingRepository programmingRepository;
+    private final ProgrammingRepository programmingRepository;
 
-    @Autowired
-    private DeviceRepository deviceRepository;
+    private final DeviceRepository deviceRepository;
+
+    public ProgrammingService(ProgrammingRepository programmingRepository, DeviceRepository deviceRepository) {
+        this.programmingRepository = programmingRepository;
+        this.deviceRepository = deviceRepository;
+    }
 
     public Programming createProgramming(Programming programming, Long deviceId) {
         Device device = deviceRepository.findById(deviceId)

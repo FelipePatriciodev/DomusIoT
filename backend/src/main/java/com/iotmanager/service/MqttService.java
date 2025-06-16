@@ -27,11 +27,11 @@ public class MqttService {
 
     private IMqttClient client;
 
-    @Autowired
-    private DeviceService deviceService;
+    private final DeviceService deviceService;
 
-    public MqttService() {
+    public MqttService(DeviceService deviceService) {
         this.client = null;
+        this.deviceService = deviceService;
     }
 
     public void publishCommand(String deviceSerial, DeviceCommandDTO command) {

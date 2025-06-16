@@ -2,72 +2,31 @@ package com.iotmanager.model;
 
 import java.time.LocalTime;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Event {
-    @Id @GeneratedValue
-    private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private ActionType action;
+	@Id
+	@GeneratedValue
+	private Long id;
 
-    private LocalTime time;
+	@Enumerated(EnumType.STRING)
+	private ActionType action;
 
-    @ManyToOne
-    private Programming programming;
-    
-    public Event() {}
-    
-    public Event(Long id, ActionType action, LocalTime time, Programming programming) {
-		super();
-		this.id = id;
-		this.action = action;
-		this.time = time;
-		this.programming = programming;
-	}
+	private LocalTime time;
+
+	@ManyToOne
+	private Programming programming;
 
 	public enum ActionType {
-        TURN_ON,
-        TURN_OFF
-    }
-
-	public Long getId() {
-		return id;
+		TURN_ON,
+		TURN_OFF
 	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public ActionType getAction() {
-		return action;
-	}
-
-	public void setAction(ActionType action) {
-		this.action = action;
-	}
-
-	public LocalTime getTime() {
-		return time;
-	}
-
-	public void setTime(LocalTime time) {
-		this.time = time;
-	}
-
-	public Programming getProgramming() {
-		return programming;
-	}
-
-	public void setProgramming(Programming programming) {
-		this.programming = programming;
-	}
-    
-    
 }
