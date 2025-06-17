@@ -2,6 +2,7 @@ package com.iotmanager.service;
 
 
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -69,9 +70,34 @@ public class MqttService {
             client.subscribe(topic, (t, msg) -> {
                 String payload = new String(msg.getPayload(), StandardCharsets.UTF_8);
                 System.out.println("📡 Message received from [" + t + "]: " + payload);
-                // Optionally process the payload here
-            });
 
+                try {
+                    ObjectMapper mapper = new ObjectMapper();
+                    DeviceCommandDTO uplink = mapper.readValue(payload, DeviceCommandDTO.class);
+
+                    String serial = uplink.getDevice_id();
+                    if (serial == null || serial.isBlank()) {
+                        System.out.println("⚠️ device_id missing in uplink");
+                        return;
+                    }
+
+                    Device device = deviceService.getDeviceBySerial(serial);
+                    if (device == null) {
+                        System.out.println("⚠️ Device with serial '" + serial + "' not found.");
+                        return;
+                    }
+
+                    device.setStatus(uplink.getOutput_status() != null && uplink.getOutput_status() == 1);
+                    device.setLastSeen(LocalDateTime.now());
+                    deviceService.saveDevice(device);
+
+                    System.out.println("✅ Updated device " + serial + " status and lastSeen");
+
+                } catch (Exception e) {
+                    System.out.println("❌ Error processing uplink message");
+                    e.printStackTrace();
+                }
+            });
             System.out.println("✅ Subscribed to topic: " + topic);
         } catch (MqttException e) {
             e.printStackTrace();

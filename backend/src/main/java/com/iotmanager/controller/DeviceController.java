@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,6 +54,32 @@ public class DeviceController {
         mqttService.subscribeToDevice(saved.getSerial());
         return ResponseEntity.ok(saved);
     }
+    
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Device updatedDevice) {
+        Optional<Device> existingOpt = deviceService.getDeviceById(id);
+        if (existingOpt.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Device existingDevice = existingOpt.get();
+
+        if (updatedDevice.getSerial() == null || updatedDevice.getSerial().isBlank()) {
+            return ResponseEntity.badRequest().body("Serial is required.");
+        }
+
+        boolean serialExists = deviceService.getAllDevices().stream()
+            .anyMatch(d -> !d.getId().equals(id) && d.getSerial().equals(updatedDevice.getSerial()));
+        if (serialExists) {
+            return ResponseEntity.status(409).body("Another device already uses this serial.");
+        }
+
+        existingDevice.setSerial(updatedDevice.getSerial());
+        deviceService.saveDevice(existingDevice);
+
+        return ResponseEntity.ok(existingDevice);
+    }
+
 
 
     @DeleteMapping("/{id}")
