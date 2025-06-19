@@ -18,8 +18,11 @@ import com.iotmanager.service.ProgrammingService;
 @RequestMapping("/api/programming")
 public class ProgrammingController {
 
-    @Autowired
-    private ProgrammingService programmingService;
+    private final ProgrammingService programmingService;
+
+    public ProgrammingController(ProgrammingService programmingService) {
+        this.programmingService = programmingService;
+    }
 
     @PostMapping("/device/{deviceId}")
     public ResponseEntity<?> create(@PathVariable Long deviceId, @RequestBody Programming programming) {

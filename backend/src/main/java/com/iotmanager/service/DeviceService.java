@@ -12,8 +12,11 @@ import com.iotmanager.repository.DeviceRepository;
 @Service
 public class DeviceService {
 
-    @Autowired
-    private DeviceRepository deviceRepository;
+    private final DeviceRepository deviceRepository;
+
+    public DeviceService(DeviceRepository deviceRepository) {
+        this.deviceRepository = deviceRepository;
+    }
 
     public List<Device> getAllDevices() {
         return deviceRepository.findAll();

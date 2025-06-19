@@ -22,11 +22,14 @@ import com.iotmanager.service.MqttService;
 @RequestMapping("/api/devices")
 public class DeviceController {
 
-    @Autowired
-    private DeviceService deviceService;
-    @Autowired
-    private MqttService mqttService;
-    
+    private final DeviceService deviceService;
+    private final MqttService mqttService;
+
+    public DeviceController(DeviceService deviceService, MqttService mqttService) {
+        this.deviceService = deviceService;
+        this.mqttService = mqttService;
+    }
+
     @GetMapping
     public List<Device> list() {
         return deviceService.getAllDevices();
