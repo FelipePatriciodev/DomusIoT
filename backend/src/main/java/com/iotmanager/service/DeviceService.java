@@ -38,4 +38,8 @@ public class DeviceService {
         return deviceRepository.findBySerial(serial).isPresent();
     }
 
+    public Device getDeviceBySerial(String serial) {
+        return deviceRepository.findBySerial(serial).orElse(null);
+    }
+
 }

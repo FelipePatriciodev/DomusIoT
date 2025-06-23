@@ -10,6 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DeviceCommandDTO {
+    private String deviceId;  
     private Integer intervalMin;
     private Integer outputStatus;
     private List<ScheduleEntry> schedules;
