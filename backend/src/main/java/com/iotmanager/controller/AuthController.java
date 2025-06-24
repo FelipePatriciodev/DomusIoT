@@ -44,6 +44,17 @@ public class AuthController {
         return ResponseEntity.ok(savedUser);
     }
     
+    @GetMapping("/me")
+    public ResponseEntity<?> getLoggedUser(@RequestHeader("Authorization") String authHeader) {
+        try {
+            String token = authHeader.replace("Bearer ", "");
+            String username = jwtUtil.extractUsername(token);
+            return ResponseEntity.ok(Map.of("username", username));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
+        }
+    }
+
     @GetMapping("/validate")
     public ResponseEntity<?> validateToken(@RequestHeader("Authorization") String authHeader) {
         try {
